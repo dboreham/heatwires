@@ -1,4 +1,0 @@
-python-kasa>=0.10
-
-[dev]
-pytest

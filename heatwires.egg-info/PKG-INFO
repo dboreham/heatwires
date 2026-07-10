@@ -1,8 +1,0 @@
-Metadata-Version: 2.4
-Name: heatwires
-Version: 0.1.0
-Summary: Automated control of roof heat wires based on weather conditions
-Requires-Python: >=3.11
-Requires-Dist: python-kasa>=0.10
-Provides-Extra: dev
-Requires-Dist: pytest; extra == "dev"
