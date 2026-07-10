@@ -1,0 +1,59 @@
+# heatwires configuration
+
+[location]
+# NOTE: defaulted to Bozeman, MT city center — adjust to the actual building
+# location (elevation matters for temperature accuracy).
+latitude = 45.68
+longitude = -111.04
+
+[thresholds]
+# Turn wires ON when temp is inside [on_temp_min_f, on_temp_max_f] AND there
+# is a snow signal. The melt-refreeze danger zone.
+on_temp_max_f = 35.0
+on_temp_min_f = 8.0
+# Turn OFF when temp rises past off_temp_high_f (meltwater drains freely)
+# or drops below off_temp_low_f (nothing is melting; wires are wasted power).
+# Gaps between on/off thresholds provide temperature hysteresis.
+off_temp_high_f = 38.0
+off_temp_low_f = 5.0
+
+# Snow signal: snowfall observed in the last N hours, or forecast in the next
+# M hours, exceeding the trigger amount — or standing snow depth.
+snow_lookback_hours = 48
+snow_forecast_hours = 24
+snow_trigger_inches = 0.5
+snow_depth_trigger_inches = 1.0
+
+# Minimum time wires stay ON before the program will turn them OFF.
+# Turning ON is never delayed.
+min_on_minutes = 60
+
+[failsafe]
+# If weather data has been unavailable for this many consecutive runs,
+# assume the worst during winter months and turn the wires ON.
+max_weather_failures = 3
+winter_months = [10, 11, 12, 1, 2, 3, 4]
+
+[state]
+# Where run-to-run state (hysteresis timers, failure counts) is kept.
+file = "state.json"
+
+# Devices to control. `alias` is verified against the live device before any
+# actuation — if an IP has moved to a different device, it is skipped with an
+# error rather than toggled. For KP400 (multi-outlet) devices, `child_alias`
+# selects the outlet; omit it for single-relay devices like the HS200.
+# Give these static DHCP reservations in your router.
+
+[[devices]]
+host = "192.168.65.97"
+alias = "TP-LINK_Smart Plug_B0FC"
+child_alias = "Shop gutter heat wire"
+
+[[devices]]
+host = "192.168.65.98"
+alias = "TP-LINK_Smart Plug_E280"
+child_alias = "Shop roof extra wires"
+
+[[devices]]
+host = "192.168.65.192"
+alias = "House Roof Heat Wires"

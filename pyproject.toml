@@ -1,0 +1,14 @@
+[project]
+name = "heatwires"
+version = "0.1.0"
+description = "Automated control of roof heat wires based on weather conditions"
+requires-python = ">=3.11"
+dependencies = [
+    "python-kasa>=0.10",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
